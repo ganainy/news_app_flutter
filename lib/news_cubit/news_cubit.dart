@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:news_app_flutter/modules/business.dart';
 import 'package:news_app_flutter/modules/science.dart';
 import 'package:news_app_flutter/modules/sports.dart';
@@ -19,37 +17,101 @@ class NewsCubit extends Cubit<NewsState> {
   int botNavCurrentIndex = 0;
 
   List<BottomNavigationBarItem> botNavItems = [
-    BottomNavigationBarItem(icon: Icon(Icons.business), label: 'Business'),
-    BottomNavigationBarItem(icon: Icon(Icons.sports), label: 'Sports'),
-    BottomNavigationBarItem(icon: Icon(Icons.science), label: 'Science'),
+    const BottomNavigationBarItem(
+        icon: Icon(Icons.business), label: 'Business'),
+    const BottomNavigationBarItem(icon: Icon(Icons.sports), label: 'Sports'),
+    const BottomNavigationBarItem(icon: Icon(Icons.science), label: 'Science'),
   ];
 
   List<Widget> botNavScreens = [
-    BusinessScreen(),
-    SportsScreen(),
-    ScienceScreen()
+    const BusinessScreen(),
+    const SportsScreen(),
+    const ScienceScreen()
   ];
 
   changeBotNavIndex(int index) {
     botNavCurrentIndex = index;
     emit(NewsBotNavState());
+    //load the news of category based on the selected bottom nav
+    switch (index) {
+      case 0:
+        {
+          getBusinessNews();
+          break;
+        }
+
+      case 1:
+        {
+          getSportsNews();
+          break;
+        }
+
+      case 2:
+        {
+          getScienceNews();
+          break;
+        }
+    }
   }
 
-  Map<String, dynamic>? businessNews;
+  Map<String, dynamic> businessNews = {};
+  Map<String, dynamic> sportsNews = {};
+  Map<String, dynamic> scienceNews = {};
 
   void getBusinessNews() {
-    emit(BusinessLoadingState());
-    DioHelper.getData(queryParams: {
-      'country': 'us',
-      'category': 'business',
-      'apiKey': Constants.API_KEY,
-    }).then((value) {
-      print(value.data.toString());
-      businessNews = value.data;
+    //if there is already news don't load again
+    if (businessNews.isEmpty) {
+      emit(BusinessLoadingState());
+      DioHelper.getData(queryParams: {
+        'country': 'de',
+        'category': 'business',
+        'apiKey': Constants.API_KEY,
+      }).then((value) {
+        businessNews = value.data;
+        emit(BusinessSuccessState());
+      }).catchError((error) {
+        emit(BusinessErrorState());
+      });
+    } else {
       emit(BusinessSuccessState());
-    }).catchError((error) {
-      print(error.toString());
-      emit(BusinessErrorState());
-    });
+    }
+  }
+
+  void getSportsNews() {
+    //if there is already news don't load again
+    if (sportsNews.isEmpty) {
+      emit(SportsLoadingState());
+      DioHelper.getData(queryParams: {
+        'country': 'de',
+        'category': 'sports',
+        'apiKey': Constants.API_KEY,
+      }).then((value) {
+        sportsNews = value.data;
+        emit(SportsSuccessState());
+      }).catchError((error) {
+        emit(SportsErrorState());
+      });
+    } else {
+      emit(SportsSuccessState());
+    }
+  }
+
+  void getScienceNews() {
+    //if there is already news don't load again
+    if (scienceNews.isEmpty) {
+      emit(ScienceLoadingState());
+      DioHelper.getData(queryParams: {
+        'country': 'de',
+        'category': 'science',
+        'apiKey': Constants.API_KEY,
+      }).then((value) {
+        scienceNews = value.data;
+        emit(ScienceSuccessState());
+      }).catchError((error) {
+        emit(ScienceErrorState());
+      });
+    } else {
+      emit(ScienceSuccessState());
+    }
   }
 }
