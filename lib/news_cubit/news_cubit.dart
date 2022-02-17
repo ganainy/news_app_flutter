@@ -35,11 +35,11 @@ class NewsCubit extends Cubit<NewsState> {
     emit(NewsBotNavState());
   }
 
-  var businessNews;
+  Map<String, dynamic>? businessNews;
 
   void getBusinessNews() {
     emit(BusinessLoadingState());
-    businessNews = DioHelper.getData(queryParams: {
+    DioHelper.getData(queryParams: {
       'country': 'us',
       'category': 'business',
       'apiKey': Constants.API_KEY,

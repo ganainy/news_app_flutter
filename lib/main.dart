@@ -1,12 +1,23 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:news_app_flutter/network/dio_helper.dart';
+import 'package:news_app_flutter/shared/my_bloc_observer.dart';
 
 import 'layout/news_layout.dart';
 
 void main() {
+  //initialize dio instance to use it later for api calls
   DioHelper.init();
+  //start the logger class for the cubit states
+  BlocOverrides.runZoned(
+    () {
+      // Use cubits...
+    },
+    blocObserver: MyBlocObserver(),
+  );
+
   runApp(const MyApp());
 }
 
