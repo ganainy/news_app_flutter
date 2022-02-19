@@ -24,3 +24,5 @@ class ScienceLoadingState extends NewsState {}
 class ScienceSuccessState extends NewsState {}
 
 class ScienceErrorState extends NewsState {}
+
+class SwitchAppThemeState extends NewsState {}

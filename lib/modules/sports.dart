@@ -17,16 +17,19 @@ class SportsScreen extends StatelessWidget {
           builder: (context, state) {
             return (() {
               var newsCubit = NewsCubit.get(context);
-              if (state is SportsSuccessState) {
+              if (newsCubit.sportsNews.isEmpty) {
+                return const Center(child: CircularProgressIndicator());
+              } else {
                 return ListView.separated(
                   itemBuilder: (context, index) {
                     return buildArticleItem(
-                        imageUrl: newsCubit.sportsNews['articles'][index]
-                            ['urlToImage'],
-                        date: newsCubit.sportsNews['articles'][index]
-                            ['publishedAt'],
-                        title: newsCubit.sportsNews['articles'][index]
-                            ['title']);
+                      imageUrl: newsCubit.sportsNews['articles'][index]
+                          ['urlToImage'],
+                      date: newsCubit.sportsNews['articles'][index]
+                          ['publishedAt'],
+                      title: newsCubit.sportsNews['articles'][index]['title'],
+                      context: context,
+                    );
                   },
                   itemCount: newsCubit.sportsNews['articles'].length,
                   separatorBuilder: (BuildContext context, int index) {
@@ -37,14 +40,7 @@ class SportsScreen extends StatelessWidget {
                     );
                   },
                 );
-              } else if (state is SportsLoadingState) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state is SportsErrorState) {
-                return const Center(child: Text('Error loading news'));
-              } else {
-                //this shouldn't execute
-                throw Exception('unknown state');
-              } // your code here
+              }
             }());
           },
         );

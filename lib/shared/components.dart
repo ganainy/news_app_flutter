@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Widget buildArticleItem({
-  required String imageUrl,
+  required String? imageUrl,
   required String title,
   required String date,
+  required BuildContext context,
 }) {
   return Container(
     margin: const EdgeInsets.all(8),
@@ -16,10 +16,14 @@ Widget buildArticleItem({
           height: 120,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            child: Image(
-              fit: BoxFit.fill,
-              image: NetworkImage(imageUrl),
-            ),
+            //sometimes the api doesnt return image url so we use placeholder instead
+            child: imageUrl != null
+                ? FadeInImage.assetNetwork(
+                    placeholder: 'assets/images/no_image.png',
+                    image: imageUrl,
+                    fit: BoxFit.fill,
+                  )
+                : Image.asset('assets/images/no_image.png'),
           ),
         ),
         const SizedBox(
@@ -32,13 +36,14 @@ Widget buildArticleItem({
               Expanded(
                 child: Text(
                   title,
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
-                  maxLines: 4,
+                  style: Theme.of(context).textTheme.headline5,
+                  /*  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),*/
+                  maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               Text(
