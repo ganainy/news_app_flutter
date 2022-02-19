@@ -63,7 +63,7 @@ class NewsCubit extends Cubit<NewsState> {
     //if there is already news don't load again
     if (businessNews.isEmpty) {
       emit(BusinessLoadingState());
-      DioHelper.getData(queryParams: {
+      DioHelper.getDataByCategory(queryParams: {
         'country': 'de',
         'category': 'business',
         'apiKey': Constants.API_KEY,
@@ -82,7 +82,7 @@ class NewsCubit extends Cubit<NewsState> {
     //if there is already news don't load again
     if (sportsNews.isEmpty) {
       emit(SportsLoadingState());
-      DioHelper.getData(queryParams: {
+      DioHelper.getDataByCategory(queryParams: {
         'country': 'de',
         'category': 'sports',
         'apiKey': Constants.API_KEY,
@@ -101,7 +101,7 @@ class NewsCubit extends Cubit<NewsState> {
     //if there is already news don't load again
     if (scienceNews.isEmpty) {
       emit(ScienceLoadingState());
-      DioHelper.getData(queryParams: {
+      DioHelper.getDataByCategory(queryParams: {
         'country': 'de',
         'category': 'science',
         'apiKey': Constants.API_KEY,

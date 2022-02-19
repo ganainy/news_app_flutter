@@ -34,6 +34,7 @@ class ScienceScreen extends StatelessWidget {
                         title: newsCubit.scienceNews['articles'][index]
                             ['title'],
                         context: context,
+                        url: newsCubit.scienceNews['articles'][index]['url'],
                       );
                     },
                     itemCount: newsCubit.scienceNews['articles'].length,

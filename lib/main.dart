@@ -31,16 +31,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => NewsCubit(),
+      create: (context) => NewsCubit()
+        ..getBusinessNews()
+        ..getAppTheme(),
       child: BlocConsumer<NewsCubit, NewsState>(
         listener: (context, state) {
-          // TODO: implement listener
-          print('MaterialApp listener: ${state.toString()}');
+          print('Newscubit current state: ${state.toString()}');
         },
         builder: (context, state) {
-          var newsCubit = NewsCubit.get(context)
-            ..getBusinessNews()
-            ..getAppTheme();
+          var newsCubit = NewsCubit.get(context);
+
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
@@ -50,11 +50,11 @@ class MyApp extends StatelessWidget {
                   headline6: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
-                      fontSize: 20),
+                      fontSize: 24),
                   headline5: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
-                      fontSize: 16)),
+                      fontSize: 18)),
               primarySwatch: Colors.deepOrange,
               //because body color is originally offwhite so there is slight difference  between  appbar and body
               scaffoldBackgroundColor: const Color(0xff0D1E37),
@@ -83,6 +83,15 @@ class MyApp extends StatelessWidget {
             ),
             theme: ThemeData(
               primarySwatch: Colors.deepOrange,
+              textTheme: const TextTheme(
+                  headline6: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 24),
+                  headline5: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 18)),
               //because body color is originally offwhite so there is slight difference  between  appbar and body
               scaffoldBackgroundColor: Colors.white,
               appBarTheme: const AppBarTheme(

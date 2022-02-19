@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app_flutter/modules/search.dart';
 import 'package:news_app_flutter/news_cubit/news_cubit.dart';
+import 'package:news_app_flutter/shared/components.dart';
 
 class NewsLayout extends StatelessWidget {
   const NewsLayout({Key? key}) : super(key: key);
@@ -22,7 +24,7 @@ class NewsLayout extends StatelessWidget {
             actions: [
               IconButton(
                   onPressed: () {
-                    //todo
+                    navigateTo(context: context, screen: SearchScreen());
                   },
                   icon: const Icon(Icons.search)),
               IconButton(

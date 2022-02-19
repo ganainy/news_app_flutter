@@ -23,13 +23,13 @@ class SportsScreen extends StatelessWidget {
                 return ListView.separated(
                   itemBuilder: (context, index) {
                     return buildArticleItem(
-                      imageUrl: newsCubit.sportsNews['articles'][index]
-                          ['urlToImage'],
-                      date: newsCubit.sportsNews['articles'][index]
-                          ['publishedAt'],
-                      title: newsCubit.sportsNews['articles'][index]['title'],
-                      context: context,
-                    );
+                        imageUrl: newsCubit.sportsNews['articles'][index]
+                            ['urlToImage'],
+                        date: newsCubit.sportsNews['articles'][index]
+                            ['publishedAt'],
+                        title: newsCubit.sportsNews['articles'][index]['title'],
+                        context: context,
+                        url: newsCubit.sportsNews['articles'][index]['url']);
                   },
                   itemCount: newsCubit.sportsNews['articles'].length,
                   separatorBuilder: (BuildContext context, int index) {

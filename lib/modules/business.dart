@@ -29,6 +29,7 @@ class BusinessScreen extends StatelessWidget {
                           ['publishedAt'],
                       title: newsCubit.businessNews['articles'][index]['title'],
                       context: context,
+                      url: newsCubit.businessNews['articles'][index]['url'],
                     );
                   },
                   itemCount: newsCubit.businessNews['articles'].length,
