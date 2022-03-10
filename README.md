@@ -1,16 +1,15 @@
-# news_app_flutter
+# News App
 
-A new Flutter project.
+Simple flutter app to view and search news in different categories with dark mode support 
 
-## Getting Started
+<br>
 
-This project is a starting point for a Flutter application.
+<img src="https://cdn.discordapp.com/attachments/694933808885268531/951491405082152960/Screenshot_2022-03-10-15-45-32-087_com.example.news_app_flutter.jpg" width="350" ><br>
+<img src="https://cdn.discordapp.com/attachments/694933808885268531/951491404792758402/Screenshot_2022-03-10-15-45-46-435_com.example.news_app_flutter.jpg" width="350" ><br>
 
-A few resources to get you started if this is your first Flutter project:
+<img src="https://cdn.discordapp.com/attachments/694933808885268531/951491404176166933/Screenshot_2022-03-10-15-46-25-418_com.example.news_app_flutter.jpg" width="350" ><br>
+<img src="https://cdn.discordapp.com/attachments/694933808885268531/951491404423655434/Screenshot_2022-03-10-15-46-01-287_com.example.news_app_flutter.jpg" width="350" ><br>
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
